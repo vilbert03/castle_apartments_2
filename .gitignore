@@ -1,0 +1,68 @@
+# Python
+__pycache__/
+**/__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+*.cover
+*.log
+
+# Django stuff
+*.sqlite3
+db.sqlite3
+media/
+*.pot
+*.mo
+
+# Environment
+.env
+.env.*
+venv/
+ENV/
+env/
+*.env
+
+# VSCode
+.vscode/
+
+# Mac
+.DS_Store
+
+# Pip
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Testing
+.coverage
+htmlcov/
+.tox/
+nosetests.xml
+coverage.xml
+.hypothesis/
+
+# Migrations
+**/migrations/*.py
+!**/migrations/__init__.py
+
+# Byte-compiled / optimized / DLL files
+*.so
+
+# Node (if using with frontend stuff)
+node_modules/
+
+# Static files (optional if collected)
+staticfiles/
+static/
+
+# IDEs
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Git
+.git/
+
+lib/
+bin/
+
