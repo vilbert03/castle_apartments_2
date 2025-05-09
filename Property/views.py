@@ -23,7 +23,7 @@ properties = [
     },
     {
         'id': 2,
-        'name': 'fagragrund 12',
+        'name': 'momo 12',
         'city': 'Reykjavík',
         'postal_code': 108,
         'description': 'bla bla bla',
@@ -43,7 +43,7 @@ properties = [
 
     {
         'id': 3,
-        'name': 'fagragrund 12',
+        'name': 'hinn 12',
         'city': 'Reykjavík',
         'postal_code': 108,
         'description': 'bla bla bla',
@@ -63,7 +63,7 @@ properties = [
 
     {
         'id': 4,
-        'name': 'fagragrund 12',
+        'name': 'kalli 12',
         'city': 'Reykjavík',
         'postal_code': 108,
         'description': 'bla bla bla',
@@ -83,7 +83,7 @@ properties = [
 
     {
         'id': 5,
-        'name': 'fagragrund 12',
+        'name': 'nagla 12',
         'city': 'Reykjavík',
         'postal_code': 108,
         'description': 'bla bla bla',
@@ -103,7 +103,7 @@ properties = [
 
     {
         'id': 6,
-        'name': 'fagragrund 12',
+        'name': 'brarar 12',
         'city': 'Reykjavík',
         'postal_code': 108,
         'description': 'bla bla bla',
@@ -123,7 +123,7 @@ properties = [
 
     {
         'id': 7,
-        'name': 'fagragrund 12',
+        'name': 'hagar 12',
         'city': 'Reykjavík',
         'postal_code': 108,
         'description': 'bla bla bla',
@@ -148,6 +148,7 @@ def index(request):
     return render(request, "property/properties.html", {
         "properties": properties
     })
+
 
 def get_property_by_id(request, id):
     prop = [x for x in properties if x['id'] == id][0]

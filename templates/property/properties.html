@@ -1,61 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Properties</title>
-    <style>
-        .property-container {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px; 
-        }
-        .property-item {
-            padding: 10px;
-            background-color: rgba(155, 155, 155, .5);
-        }
-        .property-item h3 {
-            margin-top: 0;
-        }
-        .property-item .property-image {
-            height: 150px;
-            width: 150px;
-            background-size: contain;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
-        .property-item .property-type {
-            border-radius: 20px;
-            padding: 10px;
-            font-size: .7em;
-            background-color: #4ac1f7;
-            max-width: 100px;
-            text-align: center;
-        }
-        .property-item .property-price {
-            border-radius: 20px;
-            padding: 10px;
-            font-size: .7em;
-            background-color: #6f94c6;
-            max-width: 100px;
-            text-align: center;
-        }
-    </style>
-</head>
-<body>
-    <div class="property-container">
-        {% for property in properties %}
-            <div class="property-item">
-                <h3>{{property.name}}<h3>
-                <div class="property-image" style="background-image: url({{ property.image }})"></div>
-                <div class="property-type">{{ property.type }}</div>
-                    <div class="property-price">{{ property.price }}</div>
-                <div class="badge">{{ property.type }}</div>
-                {% if property.on_sale %}
-                    <div class="badge red">ON SALE!</div>
-                {% endif %}
-                    <a href="{% url "property_by_id" id=property.id%}">More details</a>
-            </div>
-        {% endfor %}
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="page-wrapper">
+        <div class="property-container grid-3">
+            {% for property in properties %}
+                <div class="property-item">
+                    <h3>{{property.name}}</h3>
+                    <div class="property-image" style="background-image: url({{ property.image }})"></div>
+                    <div class="property-type">{{ property.type }}</div>
+                        <div class="property-price">{{ property.price }}</div>
+                    <div class="badge">{{ property.type }}</div>
+                    {% if property.on_sale %}
+                        <div class="badge red">ON SALE!</div>
+                    {% endif %}
+                        <a href="{% url 'property:property_by_id' id=property.id %}">More details</a>
+
+                </div>
+            {% endfor %}
+        </div>
     </div>
-</body>
-</html>
+{% endblock %}

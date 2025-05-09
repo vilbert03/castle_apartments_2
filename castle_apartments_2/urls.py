@@ -17,8 +17,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+
 urlpatterns = [
-    # http: //localhost:9000/
+
+    path('', include('home.urls')),
     path('Property/', include('Property.urls')),
     # http://localhost:5000/admin
     path('admin/', admin.site.urls),
