@@ -51,9 +51,6 @@ coverage.xml
 # Node (if using with frontend stuff)
 node_modules/
 
-# Static files (optional if collected)
-staticfiles/
-static/
 
 # IDEs
 .idea/
