@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from seller.views import sellers
+from django.contrib import messages
 
 properties = [
     {
@@ -158,3 +159,19 @@ def get_property_by_id(request, id):
     return render(request, 'property/properties_detail_page.html', {
         "property": prop
     })
+
+
+def make_an_offer(request, id):
+    prop = next((x for x in properties if x['id'] == id), None)
+    if not prop:
+        return HttpResponse("Property not found", status=404)
+
+    if request.method == "POST":
+        offer_price = request.POST.get('offer_price')
+        expiration_date = request.POST.get('expiration_date')
+
+        messages.success(request, 'Your offer has been submitted successfully!')
+
+        return redirect('property:property_by_id', id=id)
+
+    return render(request, 'property/make_an_offer.html', {'property': prop})
