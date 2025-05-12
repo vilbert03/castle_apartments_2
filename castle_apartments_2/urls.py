@@ -22,7 +22,10 @@ urlpatterns = [
 
     path('', include('home.urls')),
     path('Property/', include('Property.urls')),
+<<<<<<< Updated upstream
     path('seller/', include('seller.urls')),
+=======
+>>>>>>> Stashed changes
     path('user_profile/', include('user_profile.urls')),
 
     # http://localhost:5000/admin
