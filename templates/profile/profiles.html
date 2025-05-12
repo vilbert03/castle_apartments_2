@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="page-wrapper">
+        <h1>My Profile</h1>
+        <p><strong>Name:</strong> {{ user.user_name }}</p>
+        <p><strong>Email:</strong> {{ user.user_email }}</p>
+        <p><strong>Phone:</strong> {{ user.user_phone_number }}</p>
+    </div>
+{% endblock %}

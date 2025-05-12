@@ -23,6 +23,7 @@ urlpatterns = [
     path('', include('home.urls')),
     path('Property/', include('Property.urls')),
     path('seller/', include('seller.urls')),
+    path('user_profile/', include('user_profile.urls')),
 
     # http://localhost:5000/admin
     path('admin/', admin.site.urls),
