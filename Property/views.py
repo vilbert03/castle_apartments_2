@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from seller.views import sellers
 
 properties = [
     {
@@ -12,11 +13,10 @@ properties = [
         'price': '45.000.000',
         'listing_date': '2019-09-22',
         'on_sale': True,
-        'seller_id': 1,
         'nr_rooms': 2,
         'nr_square_meters': 100,
         #sellerInformation
-        'seller_name': 'Davíð',
+        'seller_id': 2,
         #image of the seller
         #a link to sellers profile page
         'image': 'https://c.arvakur.is/m2/nyicJBddS9X0JV9NyL0M3vkONhc=/x867/smart/fs-pool/e9/e9df53fc64afcdfc950828443ed79095fb1cee3c.jpg'
@@ -31,11 +31,10 @@ properties = [
         'price': '45.000.000',
         'listing_date': '2019-09-22',
         'on_sale': True,
-        'seller_id': 1,
         'nr_rooms': 2,
         'nr_square_meters': 100,
         #sellerInformation
-        'seller_name': 'Davíð',
+        'seller_id': 1,
         #image of the seller
         #a link to sellers profile page
         'image': 'https://c.arvakur.is/m2/nyicJBddS9X0JV9NyL0M3vkONhc=/x867/smart/fs-pool/e9/e9df53fc64afcdfc950828443ed79095fb1cee3c.jpg'
@@ -51,11 +50,10 @@ properties = [
         'price': '45.000.000',
         'listing_date': '2019-09-22',
         'on_sale': True,
-        'seller_id': 1,
         'nr_rooms': 2,
         'nr_square_meters': 100,
         #sellerInformation
-        'seller_name': 'Davíð',
+        'seller_id': 2,
         #image of the seller
         #a link to sellers profile page
         'image': 'https://c.arvakur.is/m2/nyicJBddS9X0JV9NyL0M3vkONhc=/x867/smart/fs-pool/e9/e9df53fc64afcdfc950828443ed79095fb1cee3c.jpg'
@@ -71,11 +69,10 @@ properties = [
         'price': '45.000.000',
         'listing_date': '2019-09-22',
         'on_sale': True,
-        'seller_id': 1,
         'nr_rooms': 2,
         'nr_square_meters': 100,
         #sellerInformation
-        'seller_name': 'Davíð',
+        'seller_id': 1,
         #image of the seller
         #a link to sellers profile page
         'image': 'https://c.arvakur.is/m2/nyicJBddS9X0JV9NyL0M3vkONhc=/x867/smart/fs-pool/e9/e9df53fc64afcdfc950828443ed79095fb1cee3c.jpg'
@@ -91,11 +88,10 @@ properties = [
         'price': '45.000.000',
         'listing_date': '2019-09-22',
         'on_sale': True,
-        'seller_id': 1,
         'nr_rooms': 2,
         'nr_square_meters': 100,
         #sellerInformation
-        'seller_name': 'Davíð',
+        'seller_id': 2,
         #image of the seller
         #a link to sellers profile page
         'image': 'https://c.arvakur.is/m2/nyicJBddS9X0JV9NyL0M3vkONhc=/x867/smart/fs-pool/e9/e9df53fc64afcdfc950828443ed79095fb1cee3c.jpg'
@@ -111,11 +107,10 @@ properties = [
         'price': '45.000.000',
         'listing_date': '2019-09-22',
         'on_sale': True,
-        'seller_id': 1,
         'nr_rooms': 2,
         'nr_square_meters': 100,
         #sellerInformation
-        'seller_name': 'Davíð',
+        'seller_id': 1,
         #image of the seller
         #a link to sellers profile page
         'image': 'https://c.arvakur.is/m2/nyicJBddS9X0JV9NyL0M3vkONhc=/x867/smart/fs-pool/e9/e9df53fc64afcdfc950828443ed79095fb1cee3c.jpg'
@@ -131,17 +126,20 @@ properties = [
         'price': '45.000.000',
         'listing_date': '2019-09-22',
         'on_sale': True,
-        'seller_id': 1,
         'nr_rooms': 2,
         'nr_square_meters': 100,
         #sellerInformation
-        'seller_name': 'Davíð',
+        'seller_id': 2,
         #image of the seller
         #a link to sellers profile page
         'image': 'https://c.arvakur.is/m2/nyicJBddS9X0JV9NyL0M3vkONhc=/x867/smart/fs-pool/e9/e9df53fc64afcdfc950828443ed79095fb1cee3c.jpg'
     },
 ]
 
+seller_map = {s['id']: s for s in sellers}
+
+for p in properties:
+    p['seller'] = seller_map.get(p['seller_id'])
 
 # Create your views here.
 def index(request):
@@ -151,8 +149,12 @@ def index(request):
 
 
 def get_property_by_id(request, id):
-    prop = [x for x in properties if x['id'] == id][0]
+    prop = next((x for x in properties if x['id'] == id), None)
+    if not prop:
+        return HttpResponse("Property not found", status=404)
+
+    prop['seller'] = seller_map.get(prop['seller_id'])
+
     return render(request, 'property/properties_detail_page.html', {
         "property": prop
     })
-

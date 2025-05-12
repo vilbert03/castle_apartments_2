@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="page-wrapper">
+    <div class="seller-item">
+        <h3>{{ seller.name }}</h3>
+        <div class="seller-image" style="background-image: url('{{ seller.image }}')"></div>
+        <div class="badge">{{ seller.type }}</div>
+        <p>{{ seller.description }}</p>
+        <a href="javascript:history.back()">Go Back</a>
+    </div>
+</div>
+{% endblock %}
