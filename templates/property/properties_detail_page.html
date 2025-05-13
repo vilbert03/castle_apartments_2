@@ -24,7 +24,12 @@
         <p><strong>Seller:</strong> {{ property.seller.name }}</p>
         <a href="{% url 'seller:detail' id=property.seller.id %}">View seller profile</a><br>
 
-        <a href="javascript:history.back()" class="btn btn-secondary mt-2">Go back</a>
+        <div class="d-flex gap-2 mt-3">
+            <a href="javascript:history.back()" class="btn btn-secondary mt-2">Go back</a>
+            {% if property.on_sale %}
+                <a href="{% url 'property:make_an_offer' id=property.id %}" class="btn btn-primary">Make an offer</a>
+            {% endif %}
+        </div>
     </div>
 </div>
 
