@@ -1,25 +1,34 @@
 {% extends "base.html" %}
-
 {% block content %}
-    <div class="page-wrapper">
-        <div class="property-container grid-3">
-            {% for property in properties %}
-                <div class="property-item">
-                    <h3>{{property.name}}</h3>
-                    <div class="property-image" style="background-image: url({{ property.image }})"></div>
-                    <div class="property-type">{{ property.type }}</div>
-                        <div class="property-price">{{ property.price }}</div>
-                        <p>Seller: {{ property.seller.name }}</p>
-                        <a href="{% url 'seller:detail' id=property.seller.id %}">View seller profile</a>
-                    <div class="badge">{{ property.type }}</div>
-                    {% if property.on_sale %}
-                        <div class="badge red">ON SALE!</div>
-                    {% endif %}
-                        <a href="{% url 'property:property_by_id' id=property.id %}">More details</a>
+<div class="page-wrapper">
+    <div class="property-container grid-3">
+        {% for property in properties %}
+            <div class="property-item">
+                <h3>{{ property.name }}</h3>
 
-                </div>
-            {% endfor %}
-        </div>
+                {% with property.property_image_set.first as img %}
+                    {% if img %}
+                        <div class="property-image" style="background-image: url({{ img.image }})"></div>
+                    {% endif %}
+                {% endwith %}
+
+                <div class="property-type">{{ property.type }}</div>
+                <div class="property-price">{{ property.price }} ISK</div>
+
+                <p>Seller: {{ property.seller.name }}</p>
+                <a href="{% url 'seller:detail' id=property.seller.id %}">View seller profile</a>
+
+                <div class="badge">{{ property.type }}</div>
+
+                {% if property.on_sale %}
+                    <div class="badge red">ON SALE!</div>
+                {% endif %}
+
+                <a href="{% url 'property:property_by_id' id=property.id %}" class="btn btn-outline-primary mt-2">More details</a>
+            </div>
+        {% endfor %}
     </div>
+</div>
 {% endblock %}
+
 

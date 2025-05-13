@@ -1,32 +1,16 @@
-from django.shortcuts import render
-from django.http import HttpResponse
-
-sellers = [
-    {
-        'id': 1,
-        'name': 'gunni',
-        'image': 'https://c.arvakur.is/m2/nyicJBddS9X0JV9NyL0M3vkONhc=/x867/smart/fs-pool/e9/e9df53fc64afcdfc950828443ed79095fb1cee3c.jpg',
-        'type': 'individual',
-        'description': 'Gunni is a seasoned property owner with experience in rentals.'
-    },
-    {
-        'id': 2,
-        'name': 'halli',
-        'image': 'https://c.arvakur.is/m2/nyicJBddS9X0JV9NyL0M3vkONhc=/x867/smart/fs-pool/e9/e9df53fc64afcdfc950828443ed79095fb1cee3c.jpg',
-        'type': 'agency',
-        'description': 'Halli runs a real estate agency in Reykjavik.'
-    },
-]
+from django.shortcuts import render, get_object_or_404
+from .models import Seller
 
 def index(request):
+    sellers = Seller.objects.all()
     return render(request, "seller/sellers.html", {
         "sellers": sellers
     })
 
 def get_seller_by_id(request, id):
-    seller = next((x for x in sellers if x['id'] == id), None)
-    if not seller:
-        return HttpResponse("Seller not found", status=404)
+    seller = get_object_or_404(Seller, id=id)
+    properties = seller.property_set.all()  # related properties
     return render(request, "seller/seller_detail.html", {
-        "seller": seller
+        "seller": seller,
+        "properties": properties
     })

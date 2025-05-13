@@ -81,3 +81,21 @@
     border-radius: 10px;
     text-align: center;
 }
+
+
+.badge.red {
+    color: white;
+    background-color: red;
+    border-radius: 5px;
+    padding: 5px;
+    margin-top: 10px;
+    display: inline-block;
+}
+
+.badge {
+    display: inline-block;
+    padding: 5px;
+    margin-top: 5px;
+    background-color: #ccc;
+    border-radius: 5px;
+}

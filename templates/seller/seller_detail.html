@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% comment %}
 {% block content %}
 <div class="page-wrapper">
     <div class="seller-item">
@@ -7,6 +8,43 @@
         <div class="badge">{{ seller.type }}</div>
         <p>{{ seller.description }}</p>
         <a href="javascript:history.back()">Go Back</a>
+    </div>
+</div>
+{% endblock %}
+{% endcomment %}
+
+
+
+{% block content %}
+<div class="page-wrapper">
+    <div class="seller-item">
+        <h2>{{ seller.name }}</h2>
+
+        <div class="seller-logo" style="background-image: url('{{ seller.logo }}'); height: 100px; background-size: contain; background-repeat: no-repeat;"></div>
+        <div class="seller-cover" style="background-image: url('{{ seller.cover_image }}'); height: 200px; background-size: cover;"></div>
+
+        <div class="badge mt-2">{{ seller.type }}</div>
+
+        {% if seller.is_agency %}
+            <p><strong>Address:</strong> {{ seller.address }}, {{ seller.postal_code }} {{ seller.city }}</p>
+        {% endif %}
+
+        <p>{{ seller.description }}</p>
+
+        <h4 class="mt-4">Properties listed by {{ seller.name }}</h4>
+        <ul>
+            {% for property in properties %}
+                <li>
+                    <a href="{% url 'property:property_by_id' id=property.id %}">
+                        {{ property.name }} – {{ property.address }}
+                    </a>
+                </li>
+            {% empty %}
+                <li>This seller has no properties listed.</li>
+            {% endfor %}
+        </ul>
+
+        <a href="javascript:history.back()" class="btn btn-secondary mt-3">Go Back</a>
     </div>
 </div>
 {% endblock %}
