@@ -8,16 +8,18 @@
         <input type="text" id="offer_price" name="offer_price"><br><br>
 
         <label for="expiration_date">Expiration Date:</label><br>
-        <input type="data" id="expiration_date" name="expiration_date"><br><br>
+        <input type="date" id="expiration_date" name="expiration_date"><br><br>
 
-        <button type="submit">Submit Offer</button>
+        <div class="d-flex gap-2 mt-3">
+            <a href="javascript:history.back()" class="btn btn-secondary">Go Back</a>
+            <button type="submit" class="btn btn-primary">Submit Offer</button>
+        </div>
     </form>
 
     {% if messages %}
         {% for message in messages %}
-            <p>{{ message }}</p>
+            <div class="alert alert-info mt-3">{{ message }}</div>
         {% endfor %}
     {% endif %}
 
-    <a href="javascript:history.back()">Go Back</a>
 {% endblock %}

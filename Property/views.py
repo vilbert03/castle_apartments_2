@@ -1,6 +1,8 @@
-from django.shortcuts import render, get_object_or_404
-from .models import Property
+from django.shortcuts import render, get_object_or_404, redirect
+from Property.models import Property
 from django.contrib import messages
+from Offer.models import PurchaseOffer
+from datetime import datetime
 
 
 def index(request):
@@ -17,17 +19,28 @@ def get_property_by_id(request, id):
 
 
 def make_an_offer(request, id):
-    prop = next((x for x in properties if x['id'] == id), None)
-    if not prop:
-        return HttpResponse("Property not found", status=404)
+    prop = get_object_or_404(Property, id=id)
 
     if request.method == "POST":
         offer_price = request.POST.get('offer_price')
         expiration_date = request.POST.get('expiration_date')
 
-        messages.success(request, 'Your offer has been submitted successfully!')
+        if offer_price and expiration_date:
+            try:
+                expiration_date_obj = datetime.strptime(expiration_date, '%Y-%m-%d').date()
 
-        return redirect('property:property_by_id', id=id)
+                PurchaseOffer.objects.create(
+                    property=prop,
+                    offer_price=float(offer_price),
+                    date_expired=expiration_date_obj
+                )
+
+                messages.success(request, "Your offer has been submitted successfully!")
+                return redirect('property:property_by_id', id=id)
+
+            except ValueError:
+                messages.error(request, "Invalid date format. Please use YYYY-MM-DD.")
+        else:
+            messages.error(request, "Please fill in all fields.")
 
     return render(request, 'property/make_an_offer.html', {'property': prop})
-
