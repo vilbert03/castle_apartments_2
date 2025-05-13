@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% comment %}
 {% block content %}
 <div class="page-wrapper">
     {% for seller in sellers %}
@@ -6,6 +7,21 @@
             <h3>{{ seller.name }}</h3>
             <div class="seller-image" style="background-image: url('{{ seller.image }}')"></div>
             <a href="{% url 'seller:detail' seller.id %}">
+                <button>View Seller</button>
+            </a>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
+{% endcomment %}
+
+{% block content %}
+<div class="page-wrapper">
+    {% for seller in sellers %}
+        <div class="seller-item">
+            <h3>{{ seller.name }}</h3>
+            <div class="seller-image" style="background-image: url('{{ seller.image }}')"></div>
+            <a href="{% url 'seller:detail' id=seller.id %}">
                 <button>View Seller</button>
             </a>
         </div>

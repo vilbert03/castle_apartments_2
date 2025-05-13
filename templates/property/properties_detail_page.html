@@ -1,6 +1,40 @@
 {% extends "base.html" %}
 {% block content %}
 
+<div class="page-wrapper">
+    <div class="property-item">
+        <h3>{{ property.name }}</h3>
+
+        <div class="property-gallery">
+            {% for img in property.property_image_set.all %}
+                <div class="property-image" style="background-image: url({{ img.image }})"></div>
+            {% endfor %}
+        </div>
+
+        <div class="property-type">{{ property.type }}</div>
+        <div class="property-price">{{ property.price }} ISK</div>
+        <div class="badge">{{ property.type }}</div>
+
+        {% if property.on_sale %}
+            <div class="badge red">ON SALE!</div>
+        {% endif %}
+
+        <p>{{ property.description }}</p>
+
+        <p><strong>Seller:</strong> {{ property.seller.name }}</p>
+        <a href="{% url 'seller:detail' id=property.seller.id %}">View seller profile</a><br>
+
+        <a href="javascript:history.back()" class="btn btn-secondary mt-2">Go back</a>
+    </div>
+</div>
+
+{% endblock %}
+
+
+{% comment %}
+{% extends "base.html" %}
+{% block content %}
+
     <div class="page-wrapper">
         <div class="property-item">
             <h3>{{ property.name }}</h3>
@@ -16,3 +50,4 @@
         </div>
     </div>
 {% endblock %}
+{% endcomment %}
