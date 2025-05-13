@@ -24,6 +24,7 @@ urlpatterns = [
     path('Property/', include('Property.urls')),
     path('seller/', include('seller.urls')),
     path('user_profile/', include('user_profile.urls')),
+    path('Offer/', include('Offer.urls')),
 
     # http://localhost:5000/admin
     path('admin/', admin.site.urls),

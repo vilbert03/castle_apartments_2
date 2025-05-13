@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>All Purchase Offers</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Property</th>
+            <th>Seller</th>
+            <th>Offer Price</th>
+            <th>Submitted</th>
+            <th>Expires</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for offer in offers %}
+        <tr>
+            <td><a href="{% url 'property:property_by_id' id=offer.property.id %}">{{ offer.property.name }}</a></td>
+            <td>{{ offer.property.seller.name }}</td>
+            <td>{{ offer.offer_price }} ISK</td>
+            <td>{{ offer.date_submitted }}</td>
+            <td>{{ offer.expiration_date }}</td>
+            <td>{{ offer.status }}</td>
+            <td>
+                {% if offer.status == 'Accepted' or offer.status == 'Contingent' %}
+                    <a href="{% url 'offer:finalize' id=offer.id %}">Finalize</a>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
