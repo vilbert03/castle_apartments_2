@@ -44,6 +44,7 @@
                 <div class="badge">{{ property.type }}</div>
                 {% if property.on_sale %}
                     <div class="badge red">ON SALE!</div>
+                    <a href="{% url 'property:make_an_offer' id=property.id %}">Make an offer</a>
                 {% endif %}
                 <p>{{ property.description }}</p>
                 <a href="javascript:history.back()">go back</a>
