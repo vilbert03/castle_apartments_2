@@ -1,16 +1,17 @@
-{% comment %}
 {% extends "base.html" %}
 
 {% block content %}
     <h1> Make an offer for {{ property.name }}</h1>
     <form method="POST">
         {% csrf_token %}
+        {{ form.as_p }}
+        {% comment %}
         <label for="offer_price">Offer Price:</label><br>
         <input type="text" id="offer_price" name="offer_price"><br><br>
 
         <label for="expiration_date">Expiration Date:</label><br>
-        <input type="date" id="expiration_date" name="expiration_date"><br><br>
-
+        <input type="date" id="date_expired" name="date_expired"><br><br>
+        {% endcomment %}
         <div class="d-flex gap-2 mt-3">
             <a href="javascript:history.back()" class="btn btn-secondary">Go Back</a>
             <button type="submit" class="btn btn-primary">Submit Offer</button>
@@ -24,4 +25,3 @@
     {% endif %}
 
 {% endblock %}
-{% endcomment %}

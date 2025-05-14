@@ -1,7 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
+    <div class="input-group mb-3">
+    <span class="input-group-text" id="search-icon">🔎</span>
+    <input type="search" id="search-value" class="form-control" placeholder="Enter search..." aria-label="Search" aria-describedby="search-icon"/>
+    </div>
 <div class="page-wrapper">
-    <div class="property-container grid-3">
+    <!--<div class="property-container grid-3"> -->
+    <div id="property-results" class="property-container grid-3">
         {% for property in properties %}
             <div class="property-item">
                 <h3>{{ property.name }}</h3>
