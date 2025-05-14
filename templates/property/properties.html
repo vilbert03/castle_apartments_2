@@ -1,9 +1,30 @@
 {% extends "base.html" %}
 {% block content %}
+{% comment %}
     <div class="input-group mb-3">
     <span class="input-group-text" id="search-icon">🔎</span>
     <input type="search" id="search-value" class="form-control" placeholder="Enter search..." aria-label="Search" aria-describedby="search-icon"/>
     </div>
+{% endcomment %}
+<form method="get" class="mb-4 d-flex gap-2 flex-wrap">
+    <input type="text" name="search_filter" class="form-control" placeholder="Street name" value="{{ request.GET.search_filter }}">
+    <input type="number" name="min_price" class="form-control" placeholder="Min price" value="{{ request.GET.min_price }}">
+    <input type="number" name="max_price" class="form-control" placeholder="Max price" value="{{ request.GET.max_price }}">
+    <input type="text" name="postal_code" class="form-control" placeholder="Postal code" value="{{ request.GET.postal_code }}">
+    <select name="type" class="form-select">
+        <option value="">All types</option>
+        <option value="house" {% if request.GET.type == "house" %}selected{% endif %}>House</option>
+        <option value="apartment" {% if request.GET.type == "apartment" %}selected{% endif %}>Apartment</option>
+        <option value="villa" {% if request.GET.type == "villa" %}selected{% endif %}>Villa</option>
+        <option value="townhouse" {% if request.GET.type == "townhouse" %}selected{% endif %}>Townhouse</option>
+    </select>
+    <select name="order_by" class="form-select">
+        <option value="">Sort by</option>
+        <option value="price" {% if request.GET.order_by == "price" %}selected{% endif %}>Price</option>
+        <option value="name" {% if request.GET.order_by == "name" %}selected{% endif %}>Name</option>
+    </select>
+    <button type="submit" class="btn btn-primary">Apply filters</button>
+</form>    
 <div class="page-wrapper">
     <!--<div class="property-container grid-3"> -->
     <div id="property-results" class="property-container grid-3">
@@ -35,5 +56,4 @@
     </div>
 </div>
 {% endblock %}
-
 
