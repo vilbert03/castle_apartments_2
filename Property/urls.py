@@ -9,7 +9,7 @@ urlpatterns = [
     #path('', views.index, name='Property-index'),
     path('<int:id>', views.get_property_by_id, name='property_by_id'),
 
-    path('<int:id>/make_an_offer', views.make_an_offer, name='make_an_offer'),
+#    path('<int:id>/make_an_offer', views.make_an_offer, name='make_an_offer'),
 
 
 ]

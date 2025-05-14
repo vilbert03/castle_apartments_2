@@ -27,7 +27,10 @@
         <div class="d-flex gap-2 mt-3">
             <a href="javascript:history.back()" class="btn btn-secondary mt-2">Go back</a>
             {% if property.on_sale %}
+                <a href="{% url 'Offer:make_an_offer' property.id %}" class="btn btn-primary">Make an offer</a>
+                {% comment %}
                 <a href="{% url 'property:make_an_offer' id=property.id %}" class="btn btn-primary">Make an offer</a>
+                {% endcomment %}
             {% endif %}
         </div>
     </div>
@@ -35,25 +38,3 @@
 
 {% endblock %}
 
-
-{% comment %}
-{% extends "base.html" %}
-{% block content %}
-
-    <div class="page-wrapper">
-        <div class="property-item">
-            <h3>{{ property.name }}</h3>
-                <div class="property-image" style="background-image: url({{ property.image }})"></div>
-                <div class="property-type">{{ property.type }}</div>
-                <div class="property-price">{{ property.price }}</div>
-                <div class="badge">{{ property.type }}</div>
-                {% if property.on_sale %}
-                    <div class="badge red">ON SALE!</div>
-                    <a href="{% url 'property:make_an_offer' id=property.id %}">Make an offer</a>
-                {% endif %}
-                <p>{{ property.description }}</p>
-                <a href="javascript:history.back()">go back</a>
-        </div>
-    </div>
-{% endblock %}
-{% endcomment %}
