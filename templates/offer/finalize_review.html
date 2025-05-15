@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Step 3: Review</h2>
+
+<h4>Contact Info</h4>
+<ul>
+    <li><strong>Full name:</strong> {{ data.full_name }}</li>
+    <li><strong>National ID:</strong> {{ data.national_id }}</li>
+    <li><strong>Address:</strong> {{ data.street }}, {{ data.postal_code }} {{ data.city }}</li>
+    <li><strong>Country:</strong> {{ data.country }}</li>
+</ul>
+
+<h4>Payment</h4>
+<ul>
+    <li><strong>Method:</strong> {{ data.payment_method|capfirst }}</li>
+    {% if data.payment_method == 'credit_card' %}
+        <li><strong>Cardholder:</strong> {{ data.cardholder_name }}</li>
+        <li><strong>Card Number:</strong> {{ data.card_number }}</li>
+        <li><strong>Expiry:</strong> {{ data.expiry_date }}</li>
+        <li><strong>CVC:</strong> {{ data.cvc }}</li>
+    {% elif data.payment_method == 'bank_transfer' %}
+        <li><strong>Bank Account:</strong> {{ data.bank_account }}</li>
+    {% elif data.payment_method == 'mortgage' %}
+        <li><strong>Mortgage Provider:</strong> {{ data.mortgage_provider }}</li>
+    {% endif %}
+</ul>
+
+<form method="post">
+    {% csrf_token %}
+    <div class="d-flex gap-2 mt-3">
+        <a href="{% url 'Offer:finalize_step2' offer.id %}" class="btn btn-secondary">Back</a>
+        <button type="submit" class="btn btn-success">Confirm Purchase</button>
+    </div>
+</form>
+{% endblock %}

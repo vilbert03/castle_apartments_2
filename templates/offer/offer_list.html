@@ -25,7 +25,10 @@
             <td>{{ offer.status }}</td>
             <td>
                 {% if offer.status == 'Accepted' or offer.status == 'Contingent' %}
+                    {% comment %}
                     <a href="{% url 'offer:finalize' id=offer.id %}">Finalize</a>
+                    {% endcomment %}
+                    <a href="{% url 'Offer:finalize_step1' offer.id %}">Finalize</a>
                 {% endif %}
             </td>
         </tr>
