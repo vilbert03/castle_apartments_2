@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+    
+    <h1> Profile</h1>
+    
+    {% if user.userprofile.profile_image %}
+        <div class="avatar" style="background-image: url({{ user.userprofile.profile_image }})"></div>
+    {% else %}
+        <p>No profile image set.</p>
+    {% endif %}
+    
+    <p><strong>Username:</strong> {{ user.username }}</p>
+    
+    {% if messages %}
+        {% for message in messages %}
+            <div class="WOW {{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+    
+    <form method="post" action="{% url 'my_profile' %}">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" class="btn btn-primary" value="Update" />
+        
+    </form>
+
+{% endblock %}
+

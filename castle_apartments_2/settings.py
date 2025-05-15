@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'Property.apps.PropertyConfig',
     'seller.apps.SellerConfig',
     'Offer.apps.OfferConfig',
+    'user_profile.apps.UserProfileConfig',
 ]
 
 MIDDLEWARE = [
@@ -137,3 +138,7 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_REDIRECT_URL = '/user_profile/my_profile'
+LOGIN_URL = '/user_profile/login/'
+
