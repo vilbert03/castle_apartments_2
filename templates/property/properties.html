@@ -30,7 +30,7 @@
     <div id="property-results" class="property-container grid-3">
         {% for property in properties %}
             <div class="property-item">
-                <h3>{{ property.name }}</h3>
+                <h3>{{ property.address }}</h3>
 
                 {% with property.property_image_set.first as img %}
                     {% if img %}

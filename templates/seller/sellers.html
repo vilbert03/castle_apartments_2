@@ -1,30 +1,30 @@
 {% extends "base.html" %}
-{% comment %}
-{% block content %}
-<div class="page-wrapper">
-    {% for seller in sellers %}
-        <div class="seller-item">
-            <h3>{{ seller.name }}</h3>
-            <div class="seller-image" style="background-image: url('{{ seller.image }}')"></div>
-            <a href="{% url 'seller:detail' seller.id %}">
-                <button>View Seller</button>
-            </a>
-        </div>
-    {% endfor %}
-</div>
-{% endblock %}
-{% endcomment %}
 
 {% block content %}
+
 <div class="page-wrapper">
-    {% for seller in sellers %}
-        <div class="seller-item">
-            <h3>{{ seller.name }}</h3>
-            <div class="seller-image" style="background-image: url('{{ seller.image }}')"></div>
-            <a href="{% url 'seller:detail' id=seller.id %}">
-                <button>View Seller</button>
-            </a>
-        </div>
-    {% endfor %}
+    <div class="seller-grid"
+        style="display: flex;
+        flex-wrap:  wrap;
+        gap: 250px;
+        justify-content: start;">
+
+        {% for seller in sellers %}
+            <div class="seller-item">
+                <h3>{{ seller.name }}</h3>
+                    <div class="seller-image" style="
+                        width: 200%;
+                        max-width: 300px;
+                        height: 350px;
+                        background-image: url('{{ seller.image }}');
+                        background-size: cover;
+                        background-position: center;
+                        border-radius: 10px;
+                        margin-bottom: 10px">
+                    </div>
+                    <a href="{% url 'seller:detail' id=seller.id %}" class="btn btn-outline-primary">View Seller</a>
+                </div>
+        {% endfor %}
+    </div>
 </div>
 {% endblock %}

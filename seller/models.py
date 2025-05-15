@@ -15,7 +15,7 @@ class Seller(models.Model):
     postal_code = models.IntegerField(blank=True, null=True)
 
     def is_agency(self):
-        return self.type.lower() == "agency"
+        return self.type.lower() == "agency" or "Real Estate Agent"
 
     def __str__(self):
         return self.name

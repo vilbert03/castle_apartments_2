@@ -1,9 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
 
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-success mt-3">{{ message }}</div>
+    {% endfor %}
+{% endif %}
+
 <div class="page-wrapper">
     <div class="property-item">
-        <h3>{{ property.name }}</h3>
+        <h3>{{ property.address }}</h3>
 
         <div class="property-gallery">
             {% for img in property.property_image_set.all %}
@@ -11,27 +17,42 @@
             {% endfor %}
         </div>
 
+        <p><strong>City:</strong> {{ property.city }}</p>
+        <p><strong>Postal code:</strong> {{ property.postal_code }}</p>
+        <p><strong>Listing Date:</strong> {{ property.listing_date }}</p>
         <p><strong>Type:</strong> {{ property.type }}</p>
         <p><strong>Price:</strong> {{ property.price }} ISK</p>
         <p><strong>Rooms:</strong> {{ property.nr_rooms }}</p>
+        <p><strong>Bedrooms:</strong> {{ property.nr_bedrooms }}</p>
+        <p><strong>Bathrooms:</strong> {{ property.nr_bathrooms }}</p>
         <p><strong>Size:</strong> {{ property.nr_square_meters }} m²</p>
         <p><strong>Seller:</strong> {{ property.seller.name }}</p>
         <a href="{% url 'seller:detail' id=property.seller.id %}">View seller profile</a><br>
 
+        <div class="seller-thumbnail" style="
+            width: 120px;
+            height: 120px;
+            background-image: url('{{ property.seller.image }}');
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+            margin: 10px 0;">
+        </div>
 
         {% if property.on_sale %}
             <div class="badge red">ON SALE!</div>
         {% endif %}
 
-        <p>{{ property.description }}</p>
-    ta
+        <p><strong>Description: </strong>{{ property.description }}</p>
+
         <div class="d-flex gap-2 mt-3">
             <a href="javascript:history.back()" class="btn btn-secondary mt-2">Go back</a>
             {% if property.on_sale %}
-                <a href="{% url 'Offer:make_an_offer' property.id %}" class="btn btn-primary">Make an offer</a>
-                {% comment %}
-                <a href="{% url 'property:make_an_offer' id=property.id %}" class="btn btn-primary">Make an offer</a>
-                {% endcomment %}
+                {% if offer %}
+                    <a href="{% url 'Offer:make_an_offer' property.id %}" class="btn btn-primary">Resubmit a purchase offer</a>
+                {% else %}
+                    <a href="{% url 'Offer:make_an_offer' property.id %}" class="btn btn-primary">Submit a purchase offer</a>
+                {% endif %}
             {% endif %}
         </div>
     </div>

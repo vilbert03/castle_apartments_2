@@ -1,48 +1,62 @@
 {% extends "base.html" %}
-{% comment %}
-{% block content %}
-<div class="page-wrapper">
-    <div class="seller-item">
-        <h3>{{ seller.name }}</h3>
-        <div class="seller-image" style="background-image: url('{{ seller.image }}')"></div>
-        <div class="badge">{{ seller.type }}</div>
-        <p>{{ seller.description }}</p>
-        <a href="javascript:history.back()">Go Back</a>
-    </div>
-</div>
-{% endblock %}
-{% endcomment %}
-
-
 
 {% block content %}
+
 <div class="page-wrapper">
     <div class="seller-item">
         <h2>{{ seller.name }}</h2>
 
-        <div class="seller-logo" style="background-image: url('{{ seller.logo }}'); height: 100px; background-size: contain; background-repeat: no-repeat;"></div>
-        <div class="seller-cover" style="background-image: url('{{ seller.cover_image }}'); height: 200px; background-size: cover;"></div>
+        <div class="seller-cover" style="
+            background-image: url('{{ seller.cover_image }}');
+            height: 400px;
+            width: 300px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            border-radius: 10%;">
+        </div>
 
-        <div class="badge mt-2">{{ seller.type }}</div>
+        <div class="seller-logo" style="
+            background-image: url('{{ seller.logo }}');
+            height: 200px;
+            background-size: contain;
+            background-repeat: no-repeat;">
+        </div>
+
+        <p><strong>Type:</strong> {{ seller.type }}</p>
 
         {% if seller.is_agency %}
-            <p><strong>Address:</strong> {{ seller.address }}, {{ seller.postal_code }} {{ seller.city }}</p>
+            <p><strong>Address:</strong> {{ seller.address }}, {{ seller.city }} {{ seller.postal_code }}</p>
         {% endif %}
 
-        <p>{{ seller.description }}</p>
+        <p><strong>Description: </strong>{{ seller.description }}</p>
 
         <h4 class="mt-4">Properties listed by {{ seller.name }}</h4>
-        <ul>
+
+        <div class="grid-3 mt-3">
             {% for property in properties %}
-                <li>
-                    <a href="{% url 'property:property_by_id' id=property.id %}">
-                        {{ property.name }} – {{ property.address }}
-                    </a>
-                </li>
+                <div class="property-item">
+                    <h5>{{ property.name }}</h5>
+                    {% with property.property_image_set.first as img %}
+                        {% if img %}
+                            <div class="property-image" style="
+                                width: 100%;
+                                height: 120px;
+                                background-image: url('{{ img.image }}');
+                                background-size: cover;
+                                background-position:  center;
+                                border-radius: 8px;
+                                margin-bottom: 10px;">
+                            </div>
+                        {% endif %}
+                    {% endwith %}
+                    <p>{{ property.address }}</p>
+                    <a href="{% url 'property:property_by_id' id=property.id %}" class="btn btn-sm btn-outline-primary mt-2">View details</a>
+                </div>
             {% empty %}
-                <li>This seller has no properties listed.</li>
+                <p>This seller has no properties listed</p>
             {% endfor %}
-        </ul>
+        </div>
 
         <a href="javascript:history.back()" class="btn btn-secondary mt-3">Go Back</a>
     </div>
