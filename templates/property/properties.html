@@ -38,13 +38,12 @@
                     {% endif %}
                 {% endwith %}
 
-                <div class="property-type">{{ property.type }}</div>
-                <div class="property-price">{{ property.price }} ISK</div>
-
-                <p>Seller: {{ property.seller.name }}</p>
+                <p><strong>Type:</strong> {{ property.type }}</p>
+                <p><strong>Price:</strong> {{ property.price }} ISK</p>
+                <p><strong>Rooms:</strong> {{ property.nr_rooms }}</p>
+                <p><strong>Size:</strong> {{ property.nr_square_meters }} m²</p>
+                <p><strong>Seller:</strong> {{ property.seller.name }}</p>
                 <a href="{% url 'seller:detail' id=property.seller.id %}">View seller profile</a>
-
-                <div class="badge">{{ property.type }}</div>
 
                 {% if property.on_sale %}
                     <div class="badge red">ON SALE!</div>
