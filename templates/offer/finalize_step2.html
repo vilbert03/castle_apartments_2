@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Step 2: Payment Method</h2>
+
+<form method="post" id="payment-form">
+    {% csrf_token %}
+    {{ form.payment_method }}
+
+    <div id="credit-card-fields" style="display: none;">
+        {{ form.cardholder_name.label_tag }} {{ form.cardholder_name }}
+        {{ form.card_number.label_tag }} {{ form.card_number }}
+        {{ form.expiry_date.label_tag }} {{ form.expiry_date }}
+        {{ form.cvc.label_tag }} {{ form.cvc }}
+    </div>
+
+    <div id="bank-transfer-fields" style="display: none;">
+        {{ form.bank_account.label_tag }} {{ form.bank_account }}
+    </div>
+
+    <div id="mortgage-fields" style="display: none;">
+        {{ form.mortgage_provider.label_tag }} {{ form.mortgage_provider }}
+    </div>
+
+    <div class="d-flex gap-2 mt-3">
+        <a href="{% url 'Offer:finalize_step1' offer_id %}" class="btn btn-secondary">Back</a>
+        <button type="submit" class="btn btn-primary">Next</button>
+    </div>
+</form>
+
+<script>
+    const paymentRadios = document.querySelectorAll('input[name="payment_method"]');
+    const creditCardFields = document.getElementById("credit-card-fields");
+    const bankFields = document.getElementById("bank-transfer-fields");
+    const mortgageFields = document.getElementById("mortgage-fields");
+
+    function toggleFields() {
+        creditCardFields.style.display = "none";
+        bankFields.style.display = "none";
+        mortgageFields.style.display = "none";
+
+        const selected = document.querySelector('input[name="payment_method"]:checked');
+        if (!selected) return;
+
+        if (selected.value === "credit_card") creditCardFields.style.display = "block";
+        if (selected.value === "bank_transfer") bankFields.style.display = "block";
+        if (selected.value === "mortgage") mortgageFields.style.display = "block";
+    }
+
+    paymentRadios.forEach(r => r.addEventListener("change", toggleFields));
+    window.addEventListener("load", toggleFields);
+</script>
+{% endblock %}
