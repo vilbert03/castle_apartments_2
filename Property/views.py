@@ -35,7 +35,9 @@ def index(request):
 
 def get_property_by_id(request, id):
     property_obj = get_object_or_404(Property.objects.select_related('seller'), id=id)
+    offer = PurchaseOffer.objects.filter(property=property_obj).first()
     return render(request, 'property/properties_detail_page.html', {
-        "property": property_obj
+        "property": property_obj,
+        "offer": offer,
     })
 
