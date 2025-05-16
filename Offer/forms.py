@@ -34,14 +34,11 @@ class PaymentForm(forms.Form):
         widget=forms.RadioSelect
     )
 
-    # Credit card fields
     cardholder_name = forms.CharField(required=False)
     card_number = forms.CharField(required=False)
     expiry_date = forms.CharField(required=False)
     cvc = forms.CharField(required=False)
 
-    # Bank transfer field
     bank_account = forms.CharField(required=False)
 
-    # Mortgage field
     mortgage_provider = forms.CharField(required=False)

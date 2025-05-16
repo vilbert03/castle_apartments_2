@@ -1,24 +1,3 @@
-//document.addEventListener("DOMContentLoaded", function() {
-//    function registerSearchButtonHandler() {
-//        const icon = document.getElementById("search-icon");
-//        const input = document.getElementById("search-value");
-//        if (icon && input) {
-//            icon.addEventListener("click", function () {
-//                const value = input.value.trim();
-//                if (value) {
-//                    window.location.href = `?search_filter=${encodeURIComponent(value)}`;
-//                }
-//            });
-//            input.addEventListener("keydown", function (event) {
-//                if (event.key === "Enter") {
-//                    icon.click();
-//                }
-//            });
-//        }
-//    }
-//    registerSearchButtonHandler();
-//});
-
 
 document.addEventListener("DOMContentLoaded", function () {
     function registerSearchButtonHandler() {

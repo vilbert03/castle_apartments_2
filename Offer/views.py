@@ -5,7 +5,7 @@ from Property.models import Property
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
-# Create your views here.
+
 
 @login_required
 def offer_list(request):
@@ -53,7 +53,6 @@ def finalize_step2(request, offer_id):
     if request.method == 'POST':
         form = PaymentForm(request.POST)
         if form.is_valid():
-            # Merge contact info and payment info into one session dict
             contact_data = request.session.get('finalize_data', {})
             contact_data.update(form.cleaned_data)
             request.session['finalize_data'] = contact_data
@@ -77,7 +76,6 @@ def finalize_review(request, offer_id):
         return redirect('Offer:finalize_step1', offer_id=offer_id)
 
     if request.method == 'POST':
-        # Save to DB
         FinalizedPurchase.objects.create(
             offer=offer,
             full_name=data['full_name'],
@@ -95,7 +93,6 @@ def finalize_review(request, offer_id):
             mortgage_provider=data.get('mortgage_provider'),
         )
         messages.success(request, "Purchase offer finalized successfully!")
-        # Clear session
         request.session.pop('finalize_data', None)
         return redirect('Offer:finalize_success')
 

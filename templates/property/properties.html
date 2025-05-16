@@ -1,11 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-{% comment %}
-    <div class="input-group mb-3">
-    <span class="input-group-text" id="search-icon">🔎</span>
-    <input type="search" id="search-value" class="form-control" placeholder="Enter search..." aria-label="Search" aria-describedby="search-icon"/>
-    </div>
-{% endcomment %}
+
 <form method="get" class="mb-4 d-flex gap-2 flex-wrap">
     <input type="text" name="search_filter" class="form-control" placeholder="Street name" value="{{ request.GET.search_filter }}">
     <input type="number" name="min_price" class="form-control" placeholder="Min price" value="{{ request.GET.min_price }}">
@@ -26,7 +21,7 @@
     <button type="submit" class="btn btn-primary">Apply filters</button>
 </form>    
 <div class="page-wrapper">
-    <!--<div class="property-container grid-3"> -->
+
     <div id="property-results" class="property-container grid-3">
         {% for property in properties %}
             <div class="property-item">

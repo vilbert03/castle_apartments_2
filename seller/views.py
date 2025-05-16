@@ -9,7 +9,7 @@ def index(request):
 
 def get_seller_by_id(request, id):
     seller = get_object_or_404(Seller, id=id)
-    properties = seller.property_set.all()  # related properties
+    properties = seller.property_set.all()
     return render(request, "seller/seller_detail.html", {
         "seller": seller,
         "properties": properties

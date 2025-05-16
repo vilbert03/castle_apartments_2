@@ -1,6 +1,6 @@
 from django.db import models
 from seller.models import Seller
-# Create your models here.
+
 
 class Property(models.Model):
     name = models.CharField(max_length=255)
