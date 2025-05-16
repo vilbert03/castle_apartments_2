@@ -3,7 +3,6 @@ from Property.models import Property
 from django.contrib.auth.models import User
 
 
-
 class PurchaseOffer(models.Model):
     status_choice = [
         ('Pending', 'Pending'),

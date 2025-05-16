@@ -1,9 +1,6 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404
 from Property.models import Property
-from django.contrib import messages
-from django.http import JsonResponse
 from Offer.models import PurchaseOffer
-from datetime import datetime
 
 
 def index(request):
