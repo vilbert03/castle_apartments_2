@@ -3,9 +3,11 @@ from .models import PurchaseOffer, FinalizedPurchase
 from .forms import *
 from Property.models import Property
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
+@login_required
 def offer_list(request):
     offers = PurchaseOffer.objects.select_related('property', 'property__seller').all()
     return render(request, "offer/offer_list.html", {

@@ -68,3 +68,11 @@
     background-position: center;
     background-repeat: no-repeat;
 }
+
+.footer {
+    background-color: #343a40;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+}
+
