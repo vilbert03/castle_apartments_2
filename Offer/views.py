@@ -9,7 +9,7 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def offer_list(request):
-    offers = PurchaseOffer.objects.select_related('property', 'property__seller').all()
+    offers = PurchaseOffer.objects.select_related('property', 'property__seller').filter(user=request.user)
     return render(request, "offer/offer_list.html", {
         'offers': offers
     })
@@ -23,6 +23,7 @@ def make_an_offer(request, property_id):
         if form.is_valid():
             offer = form.save(commit=False)
             offer.property = property_obj
+            offer.user = request.user
             offer.save()
             messages.success(request, "Your offer has been submitted.")
             return redirect('property:property_by_id', id=property_id)

@@ -1,5 +1,6 @@
 from django.db import models
 from Property.models import Property
+from django.contrib.auth.models import User
 # Create your models here.
 
 
@@ -11,7 +12,7 @@ class PurchaseOffer(models.Model):
         ('Rejected', 'Rejected'),
         ('Contigent', 'Contigent'),
     ]
-
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     property = models.ForeignKey(Property, on_delete=models.CASCADE)
     offer_price = models.FloatField()
     date_submitted = models.DateField(auto_now_add=True)
